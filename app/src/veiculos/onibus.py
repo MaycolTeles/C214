@@ -1,7 +1,7 @@
 """
 """
 
-from src.veiculos.veiculo import Veiculo
+from veiculo import Veiculo
 
 
 class Onibus(Veiculo):

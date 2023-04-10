@@ -3,7 +3,7 @@
 Repositório contendo todos os códigos desenvolvidos para a disciplina de C214 - Engenharia de Software do INATEL.
 
 <h4 align="left"> 
-	Author :pencil2:
+	Autor :pencil2:
 </h4>
 
 <p align="left">
@@ -71,3 +71,7 @@ Para instalar todas as dependências necessárias deste projeto, execute o segui
 ```
 pip install -r requirements.txt
 ```
+
+##  Como Usar :man_technologist: <a name="how-to-use"></a>
+
+Para executar os arquivos, basta abrir e executar o arquivo `run.py` em cada subdiretório que ele contém o código necessário para executar aquele submódulo específico.
