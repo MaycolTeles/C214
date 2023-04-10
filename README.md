@@ -1,42 +1,73 @@
-# Python Template
-Template for Python projects.
+# C214 - Engenharia de Software
 
-This template should be used like so:
+Repositório contendo todos os códigos desenvolvidos para a disciplina de C214 - Engenharia de Software do INATEL.
 
-1. First, click the "Use this template" button and then "Create a new repository";
-2. Now, clone this repository locally in your machine;
-3. Add all the libraries/packages you want in your project to `packages.txt` inside the `/scripts` folder, but <b>don't remove the ones that are already there</b>;
-4. Finally, run the `start_project.sh` script located inside `/scripts` folder as well. You can run the script in Unix systems like so:
+<h4 align="left"> 
+	Author :pencil2:
+</h4>
 
-```shell
-./scripts/start_project
+<p align="left">
+ <a href="https://github.com/maycolteles">Maycol Teles Costa Dionisio Pereira</a> 
+</p>
+
+*********************
+
+## Sumário :clipboard:
+
+* [Requisitos](#requirements)
+* [Setup e Instalação](#setup-installation)
+* [Como Usar](#how-to-use)
+
+*********************
+##  Requisitos :pencil: <a name="requirements"></a>
+
+* [Python 3.6+](https://www.python.org/)
+* Pip 20.0+ (vem junto com o Python 3)
+
+*********************
+##  Setup e Instalação :white_check_mark: <a name="setup-installation"></a>
+
+### Clonando o repositório :file_folder:
+Primeiramente, para ter uma cópia local do projeto para executá-lo/testá-lo, clone o repositório em uma pasta na sua máquina:
+
+```
+git clone git@github.com:MaycolTeles/C214.git
 ```
 
-Alternatively, you can run:
+### Criando e Ativando um Ambiente Virtual :open_file_folder:
+É recomendado instalar todas as suas dependências dentro de um [virtualenv](https://docs.python.org/3/tutorial/venv.html) (ambiente virtual ou venv). Para isso - dentro da pasta do repositório clonado - crie um novo `virtualenv`:
 
-```shell
-make start
+```
+python3 -m virtualenv venv
 ```
 
-and it will work the same;
+Caso o comando acima não funcione, você pode tentar executar
 
-5. Start coding! You now have a whole environment set with the following features:
-
-### Makefile
-
-A Makefile containing some useful commands, like:
-* start (run the `./scripts/start_project.sh` script to start the project)
-* run (run the application by executing `app/run.py` file`);
-* test (run all the tests using pytest and generates a html containing the code coverage);
-* lint (run flake8 and then pylint on your code);
-* format (run black on your code);
-* clean (run Unix commands to remove `.pyc` files, `__pycache__` folders and .coverage related files);
-
-To run a Makefile command, you can just type `make <command>` from your root folder like so:
-```shell
-~/your_project_name$ make start
+```
+python -m virtualenv venv
 ```
 
-### Configuration Files
+Caso ainda sim você esteja obtendo um erro, verifique se o pacote `virtualenv` está instalado. Em caso negativo, execute:
 
-This template provides to you some right-away configurations for the `pylint`, `flake8`, `coverage` and `pre-commit´ libraries
+```
+pip install virtualenv
+```
+
+Agora, ative o ambiente virtual (para Linux/MacOS):
+
+```
+source venv/bin/activate
+```
+
+ou (para Windows):
+
+```
+venv\Scripts\activate
+```
+
+### Instalando as Dependências :wrench:
+Para instalar todas as dependências necessárias deste projeto, execute o seguinte comando no seu terminal (no mesmo diretório do arquivo `requirements.txt`) com o ambiente virtual ativado:
+
+```
+pip install -r requirements.txt
+```
