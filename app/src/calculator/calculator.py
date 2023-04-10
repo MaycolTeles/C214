@@ -106,7 +106,6 @@ def main() -> None:
     res = calculator.expo(2, 3)
     print(res)
 
-
     # UNCOMMENT LINES BELOW TO CHECK THE EXCEPTIONS
 
     # WRONG TYPE
