@@ -5,7 +5,7 @@ from typing import Optional, Union
 import sqlite3
 
 
-_DB_FULL_NAME = "app/src/movie/movies.db"
+_DB_FULL_NAME = "app/movie/movies.db"
 
 
 def run_query(query: str, values: Optional[tuple[Union[str, int], ...]]=None):

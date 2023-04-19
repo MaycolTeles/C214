@@ -2,8 +2,8 @@
 """
 from typing import Optional
 
-from database import run_query
-from movie_data import MovieData
+from src.database import run_query
+from src.movie_data import MovieData
 
 
 class MovieCrud:
@@ -87,7 +87,7 @@ class MovieCrud:
                 category=?,
                 year=?,
                 score=?
-            WHERE id=?
+            WHERE id=?;
         '''
 
         data = (
@@ -105,7 +105,7 @@ class MovieCrud:
         """
         """
         query = '''
-            DELETE FROM movies WHERE id=?
+            DELETE FROM movies WHERE id=?;
         '''
         
         data = (movie_id,)

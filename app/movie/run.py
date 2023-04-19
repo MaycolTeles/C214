@@ -3,9 +3,9 @@
 
 from typing import Optional
 
-from database import create_database
-from movie_crud import MovieCrud
-from movie_data import MovieData
+from src.database import create_database
+from src.movie_crud import MovieCrud
+from src.movie_data import MovieData
 
 
 def main() -> None:
