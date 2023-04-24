@@ -11,7 +11,7 @@ def main() -> None:
 
 def update_car() -> None:
     """"""
-    car_id = 1
+    car_id = 2
     url = f"http://127.0.0.1:8000/cars/{car_id}"
 
     json = {
