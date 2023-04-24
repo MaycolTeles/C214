@@ -1,8 +1,13 @@
 """
 """
 
-from repositories import InMemoRepository
-from repositories import SQLiteRepository
+from repositories import Repository, InMemoRepository, SQLiteRepository
 
 
-REPOSITORY_INJECTION = SQLiteRepository()
+def get_repository() -> Repository:
+    """
+    """
+    return InMemoRepository()
+
+
+REPOSITORY_INJECTION = get_repository()
