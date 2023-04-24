@@ -50,10 +50,10 @@ def insert_car(
 ):
     """"""
     car = Car(
-    brand=brand,
-    model=model,
-    year=year,
-    color=color,
+        brand=brand,
+        model=model,
+        year=year,
+        color=color,
     )
 
     repository.create_car(car)
