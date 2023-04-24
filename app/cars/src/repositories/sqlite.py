@@ -5,6 +5,7 @@ from typing import Dict, Optional, Union
 import sqlite3
 
 from models import Car
+from repository import Repository
 
 
 _DB_FULL_NAME = "cars.db"
@@ -49,7 +50,7 @@ def create_database() -> None:
     run_query(query)
 
 
-class SQLiteRepository:
+class SQLiteRepository(Repository):
     """
     """
 

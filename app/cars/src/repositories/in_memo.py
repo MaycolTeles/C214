@@ -4,14 +4,15 @@
 from typing import Dict, Optional
 
 from models import Car
+from repository import Repository
 
 
-class InMemoRepository:
+class InMemoRepository(Repository):
     """
     """
     _records: Dict[int, Car] = {}
 
-    def create_car(self, car: Car) -> int:
+    def create_car(self, car: Car) -> None:
         """
         """
         next_id = len(self._records) + 1
@@ -19,9 +20,7 @@ class InMemoRepository:
 
         self._records[car_id] = car
 
-        return car_id
-
-    def read_all_cars(self) -> Dict[int, Car]:
+    def read_all_cars(self) -> Optional[Dict[int, Car]]:
         """"""
         return self._records
 
@@ -42,8 +41,12 @@ class InMemoRepository:
 
         return True
 
-    def delete_car(self, car_id: int) -> Optional[Car]:
+    def delete_car(self, car_id: int) -> bool:
         """
         """
         response = self._records.pop(car_id, None)
-        return response
+
+        if response is None:
+            return False
+
+        return True
