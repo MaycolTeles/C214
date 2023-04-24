@@ -42,11 +42,23 @@ def get_car_by_id(car_id: int):
 
 
 @app.post("/cars")
-def insert_car(car: Car):
+def insert_car(
+    brand: str,
+    model: str,
+    year: int,
+    color: str
+):
     """"""
-    car_id = repository.create_car(car)
+    car = Car(
+    brand=brand,
+    model=model,
+    year=year,
+    color=color,
+    )
 
-    response = f"Car with id #{car_id} added into database"
+    repository.create_car(car)
+
+    response = "Car added into database"
     return {"response": response}
 
 
