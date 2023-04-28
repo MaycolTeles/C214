@@ -3,8 +3,8 @@
 
 from typing import Dict, Optional
 
-from models import Car
-from repository import Repository
+from src.models import Car
+from .repository import Repository
 
 
 class InMemoRepository(Repository):

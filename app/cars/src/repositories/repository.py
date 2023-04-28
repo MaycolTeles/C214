@@ -4,7 +4,7 @@
 from typing import Dict, Optional
 from abc import ABC, abstractmethod
 
-from models import Car
+from src.models import Car
 
 
 class Repository(ABC):

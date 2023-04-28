@@ -2,13 +2,20 @@
 """
 
 from typing import Dict, Optional, Union
+import os
+from pathlib import Path
 import sqlite3
 
-from models import Car
-from repository import Repository
+from src.models import Car
+from .repository import Repository
 
 
-_DB_FULL_NAME = "cars.db"
+def get_database_path() -> Path:
+    """"""
+    current_path = os.getcwd()
+    db_path = Path(current_path + "/cars.db")
+
+    return db_path
 
 
 def run_query(query: str, values: Optional[tuple[Union[str, int], ...]]=None, fetch_all: bool = True):
@@ -17,7 +24,9 @@ def run_query(query: str, values: Optional[tuple[Union[str, int], ...]]=None, fe
     if values is None:
         values = ()
 
-    connection = sqlite3.connect(_DB_FULL_NAME)
+    db_path = get_database_path()
+
+    connection = sqlite3.connect(db_path)
     cursor = connection.cursor()    
 
     cursor.execute(query, values)
@@ -89,9 +98,9 @@ class SQLiteRepository(Repository):
         if not response:
             return
 
-        car_id = response[0]
+        car_id = response[0][0]
         
-        car_brand, car_model, car_year, car_color = response[1:]
+        car_brand, car_model, car_year, car_color = response[0][1:]
 
         car = Car(
             brand=car_brand,
