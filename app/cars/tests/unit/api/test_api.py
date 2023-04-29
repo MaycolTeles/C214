@@ -18,8 +18,9 @@ class APITestCase(TestCase):
     Class to test the API endpoints.
     """
 
-    def setUp(self) -> None:
-        self._client = TestClient(fastapi_app)
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls._client = TestClient(fastapi_app)
 
     def _build_car(self, brand: str, model: str, year: int, color: str) -> Car:
         """
@@ -45,6 +46,21 @@ class APITestCase(TestCase):
             "color": car.color,
         }
         return json
+    
+    def test_should_get_index_endpoint(self, mock_repository: MagicMock) -> None:
+        """
+        Method to assert the api has a get method endpoint to be the index.
+        """
+        response = self._client.get("/")
+
+        actual_status_code = response.status_code
+        expected_status_code = 200
+
+        actual_response_data = response.json()
+        expected_response_data = {"message": "Cars API"}
+
+        self.assertEqual(actual_status_code, expected_status_code)
+        self.assertEqual(actual_response_data, expected_response_data)
 
     def test_should_get_all_cars_but_none_is_retrieved(self, mock_repository: MagicMock) -> None:
         """
@@ -162,7 +178,7 @@ class APITestCase(TestCase):
         response = self._client.post(f"/cars", json=test_params)
 
         actual_status_code = response.status_code
-        expected_status_code = 200
+        expected_status_code = 201
 
         actual_response_data = response.json()
         expected_response_data = {"response": "Car added into the database."}
@@ -214,7 +230,7 @@ class APITestCase(TestCase):
         expected_status_code = 200
 
         actual_response_data = response.json()
-        expected_response_data = {"response": f"Car with id ${test_car_id} updated in database."}
+        expected_response_data = {"response": f"Car with id #{test_car_id} updated in database."}
 
         self.assertEqual(actual_status_code, expected_status_code)
         self.assertEqual(actual_response_data, expected_response_data)
@@ -289,7 +305,7 @@ class APITestCase(TestCase):
         expected_status_code = 200
 
         actual_response_data = response.json()
-        expected_response_data = {"response": f"Car with id #{test_car_id} deleted from database"}
+        expected_response_data = {"response": f"Car with id #{test_car_id} deleted from database."}
 
         self.assertEqual(actual_status_code, expected_status_code)
         self.assertEqual(actual_response_data, expected_response_data)
