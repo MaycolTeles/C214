@@ -3,18 +3,13 @@ Module containing the APITestCase Class.
 """
 
 from typing import Dict, Union
-
-# Defining environment variable for testing
-import os
-os.environ['IS_TEST_ENV'] = "True"
-
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
+from fastapi.testclient import TestClient
+
 from src.api import fastapi_app
 from src.models import Car
-
-from fastapi.testclient import TestClient
 
 
 @patch("src.api.api.repository")
@@ -164,7 +159,7 @@ class APITestCase(TestCase):
 
         test_params = self._car_to_json(test_car)
 
-        response = self._client.post(f"/cars", params=test_params)
+        response = self._client.post(f"/cars", json=test_params)
 
         actual_status_code = response.status_code
         expected_status_code = 200
@@ -191,7 +186,7 @@ class APITestCase(TestCase):
             "color": "White"
         }
 
-        response = self._client.post(f"/cars", params=test_params)
+        response = self._client.post(f"/cars", json=test_params)
 
         actual_status_code = response.status_code
         expected_status_code = 422
@@ -213,7 +208,7 @@ class APITestCase(TestCase):
 
         test_params = self._car_to_json(test_car)
 
-        response = self._client.put(f"/cars/{test_car_id}", params=test_params)
+        response = self._client.put(f"/cars/{test_car_id}", json=test_params)
 
         actual_status_code = response.status_code
         expected_status_code = 200
@@ -239,7 +234,7 @@ class APITestCase(TestCase):
 
         test_params = self._car_to_json(test_car)
 
-        response = self._client.put(f"/cars/{test_wrong_car_id}", params=test_params)
+        response = self._client.put(f"/cars/{test_wrong_car_id}", json=test_params)
 
         actual_status_code = response.status_code
         expected_status_code = 404
@@ -269,7 +264,7 @@ class APITestCase(TestCase):
             "color": "White"
         }
 
-        response = self._client.put(f"/cars/{test_car_id}", params=test_params)
+        response = self._client.put(f"/cars/{test_car_id}", json=test_params)
 
         actual_status_code = response.status_code
         expected_status_code = 422

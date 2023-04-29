@@ -1,20 +1,26 @@
 """
 """
 
-import os
-
 from src.repositories import Repository, InMemoRepository, SQLiteRepository
+
+
+def _get_sqlite_repository() -> SQLiteRepository:
+    """
+    """
+    return SQLiteRepository()
+
+
+def _get_in_memo_repository() -> InMemoRepository:
+    """
+    """
+    return InMemoRepository()
 
 
 def get_repository() -> Repository:
     """
     """
-    is_test_env = os.getenv("IS_TEST_ENV")
-
-    if is_test_env:
-        return InMemoRepository()
-
-    return SQLiteRepository()
+    repository = _get_sqlite_repository()
+    return repository
 
 
 REPOSITORY_INJECTION = get_repository()

@@ -3,22 +3,28 @@
 
 from typing import Dict, Optional, Union
 import os
-from pathlib import Path
 import sqlite3
 
 from src.models import Car
 from .repository import Repository
 
 
-def get_database_path() -> Path:
+def get_database_path() -> str:
     """"""
-    current_path = os.getcwd()
-    db_path = Path(current_path + "/cars.db")
+    current_module_path = os.path.abspath(__file__)
+    current_package_path = os.path.dirname(current_module_path)
+    src_dir = os.path.dirname(current_package_path)
+    cars_dir = os.path.dirname(src_dir)
+    db_path = os.path.join(cars_dir, 'cars.db')
 
     return db_path
 
 
-def run_query(query: str, values: Optional[tuple[Union[str, int], ...]]=None, fetch_all: bool = True):
+def run_query(
+    query: str,
+    values: Optional[tuple[Union[str, int], ...]] = None,
+    fetch_all: bool = True
+):
     """
     """
     if values is None:
@@ -43,29 +49,29 @@ def run_query(query: str, values: Optional[tuple[Union[str, int], ...]]=None, fe
     return response
 
 
-def create_database() -> None:
-    """
-    """
-    query = '''
-        CREATE TABLE IF NOT EXISTS cars (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            brand TEXT,
-            model TEXT,
-            year INTEGER,
-            color TEXT
-        )
-    '''
-
-    run_query(query)
-
-
 class SQLiteRepository(Repository):
     """
     """
 
     def __init__(self) -> None:
         """"""
-        create_database()
+        self._create_database()
+
+    @staticmethod
+    def _create_database() -> None:
+        """
+        """
+        query = '''
+            CREATE TABLE IF NOT EXISTS cars (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                brand TEXT,
+                model TEXT,
+                year INTEGER,
+                color TEXT
+            )
+        '''
+
+        run_query(query)
 
     def create_car(self, car: Car) -> None:
         """

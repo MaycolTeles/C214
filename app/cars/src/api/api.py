@@ -4,7 +4,7 @@
 from src.models import Car
 from src.dependencies import REPOSITORY_INJECTION as repository
 
-from fastapi import FastAPI, HTTPException
+from fastapi import Body, FastAPI, HTTPException
 
 
 app = FastAPI()
@@ -42,15 +42,7 @@ def get_car_by_id(car_id: int):
 
 
 @app.post("/cars")
-def insert_car(brand: str, model: str, year: int, color: str):
-    """"""
-    car = Car(
-        brand=brand,
-        model=model,
-        year=year,
-        color=color,
-    )
-
+def insert_car(car: Car = Body(...)):
     repository.create_car(car)
 
     response = "Car added into the database."
@@ -58,16 +50,9 @@ def insert_car(brand: str, model: str, year: int, color: str):
 
 
 @app.put("/cars/{car_id}")
-def update_car(car_id: int, brand: str, model: str, year: int, color: str):
+def update_car(car_id: int, car: Car = Body(...)):
     """
     """
-    car = Car(
-        brand=brand,
-        model=model,
-        year=year,
-        color=color,
-    )
-
     car_was_updated = repository.update_car(car_id, car)
 
     if not car_was_updated:
