@@ -1,12 +1,15 @@
 """
 """
 
-from src.repositories import Repository, InMemoRepository, SQLiteRepository
+from src.repositories.repository import Repository
+from src.repositories.in_memo import InMemoRepository
+from src.repositories.sqlite import SQLiteRepository, create_database
 
 
 def _get_sqlite_repository() -> SQLiteRepository:
     """
     """
+    create_database()
     return SQLiteRepository()
 
 

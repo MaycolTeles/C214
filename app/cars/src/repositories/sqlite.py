@@ -9,13 +9,16 @@ from src.models import Car
 from .repository import Repository
 
 
-def get_database_path() -> str:
+DATABASE_NAME = "cars.db"
+
+
+def _get_database_full_path() -> str:
     """"""
     current_module_path = os.path.abspath(__file__)
     current_package_path = os.path.dirname(current_module_path)
     src_dir = os.path.dirname(current_package_path)
     cars_dir = os.path.dirname(src_dir)
-    db_path = os.path.join(cars_dir, 'cars.db')
+    db_path = os.path.join(cars_dir, DATABASE_NAME)
 
     return db_path
 
@@ -30,7 +33,7 @@ def run_query(
     if values is None:
         values = ()
 
-    db_path = get_database_path()
+    db_path = _get_database_full_path()
 
     connection = sqlite3.connect(db_path)
     cursor = connection.cursor()    
@@ -49,29 +52,32 @@ def run_query(
     return response
 
 
+def create_database() -> None:
+    """
+    """
+    query = '''
+        CREATE TABLE IF NOT EXISTS cars (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            brand TEXT,
+            model TEXT,
+            year INTEGER,
+            color TEXT
+        )
+    '''
+
+    run_query(query)
+
+
+def drop_database() -> None:
+    """"""
+    query = "DROP TABLE IF EXISTS cars;"
+
+    run_query(query)
+
+
 class SQLiteRepository(Repository):
     """
     """
-
-    def __init__(self) -> None:
-        """"""
-        self._create_database()
-
-    @staticmethod
-    def _create_database() -> None:
-        """
-        """
-        query = '''
-            CREATE TABLE IF NOT EXISTS cars (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                brand TEXT,
-                model TEXT,
-                year INTEGER,
-                color TEXT
-            )
-        '''
-
-        run_query(query)
 
     def create_car(self, car: Car) -> None:
         """

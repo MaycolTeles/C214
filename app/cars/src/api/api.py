@@ -41,7 +41,7 @@ def get_car_by_id(car_id: int):
     return {"car": car}
 
 
-@app.post("/cars")
+@app.post("/cars", status_code=201)
 def insert_car(car: Car = Body(...)):
     repository.create_car(car)
 
@@ -61,7 +61,7 @@ def update_car(car_id: int, car: Car = Body(...)):
 
         raise HTTPException(status_code=status_code, detail=message)
 
-    response = f"Car with id ${car_id} updated in database." 
+    response = f"Car with id #{car_id} updated in database." 
     return {"response": response}
 
 
@@ -76,5 +76,5 @@ def delete_car(car_id: int):
 
         raise HTTPException(status_code=status_code, detail=message) 
 
-    response = f"Car with id #{car_id} deleted from database"
+    response = f"Car with id #{car_id} deleted from database."
     return {"response": response}
