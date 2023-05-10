@@ -61,7 +61,7 @@ def main() -> None:
     crud.update(1, movie_data)
     print("\n")
     print("MOVIE 1 UPDATED")
-    
+
     # LISTING ALL MOVIES AGAIN
     response = crud.read_all()
     _print_response_in_table_format(response)
@@ -87,11 +87,13 @@ def _print_response_in_table_format(response: Optional[list[MovieData]]) -> None
     print("\n")
     print("************************************************************************************")
 
-    headers_string_format = f"{'NAME':<30}{'PRODUCTION COMPANY':<30}{'CATEGORY':<10}{'YEAR':<7}{'SCORE':<7}"
+    headers_string_format = \
+        f"{'NAME':<30}{'PRODUCTION COMPANY':<30}{'CATEGORY':<10}{'YEAR':<7}{'SCORE':<7}"
     print(headers_string_format)
-    
+
     for movie in response:
-        movies_string_format = f"{movie.name:<30}{movie.production_company:<30}{movie.category:<10}{movie.year:<7}{movie.score:<7}"
+        movies_string_format = f"{movie.name:<30}{movie.production_company:<30}\
+            {movie.category:<10}{movie.year:<7}{movie.score:<7}"
         print(movies_string_format)
 
     print("************************************************************************************")

@@ -107,7 +107,7 @@ class MovieCrud:
         query = '''
             DELETE FROM movies WHERE id=?;
         '''
-        
+
         data = (movie_id,)
 
         run_query(query, data)

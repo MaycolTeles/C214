@@ -30,7 +30,7 @@ class InMemoRepository(Repository):
         car = self._records.get(car_id)
 
         return car
-    
+
     def update_car(self, car_id: int, car: Car) -> bool:
         """
         """

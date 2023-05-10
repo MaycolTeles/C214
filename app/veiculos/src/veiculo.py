@@ -10,7 +10,7 @@ class Veiculo:
     _placa: Optional[str]
     _ano: Optional[int]
 
-    def __init__(self, placa: Optional[str]=None, ano: Optional[int]=None) -> None:
+    def __init__(self, placa: Optional[str] = None, ano: Optional[int] = None) -> None:
         """
         """
         self._placa = placa
@@ -39,7 +39,7 @@ class Veiculo:
         """
         """
         return self._ano
-    
+
     def exibirDados(self) -> None:
         """
         """

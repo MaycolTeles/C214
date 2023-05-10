@@ -81,7 +81,7 @@ class APIAndSQLiteTestCase(TestCase):
         )
 
         return car
-    
+
     def _car_to_json(self, car: Car) -> Dict[str, Union[str, int]]:
         """
         Private method to convert the car to JSON format.
@@ -105,7 +105,9 @@ class APIAndSQLiteTestCase(TestCase):
         expected_status_code = 200
 
         actual_response_data = response.json()
-        expected_response_data = {"cars": "No car found in database yet. Try adding some before retrieving any."}
+        expected_response_data = {
+            "cars": "No car found in database yet. Try adding some before retrieving any."
+        }
 
         self.assertEqual(actual_status_code, expected_status_code)
         self.assertEqual(actual_response_data, expected_response_data)
@@ -119,7 +121,7 @@ class APIAndSQLiteTestCase(TestCase):
         test_car = self._build_car("Fiat", "Cronos", 2023, "Black")
         test_params = self._car_to_json(test_car)
 
-        response = self._client.post(f"/cars", json=test_params)
+        response = self._client.post("/cars", json=test_params)
 
         actual_status_code = response.status_code
         expected_status_code = 201
@@ -146,7 +148,8 @@ class APIAndSQLiteTestCase(TestCase):
     def test_should_insert_three_cars_then_retrieve_only_the_first_inserted(self) -> None:
         """
         Method to assert the api has a post method endpoint to insert three cars into
-        sqlite database and then retrieve only the first that was inserted from a get method endpoint.
+        sqlite database and then retrieve only the first that was inserted
+        from a get method endpoint.
         """
         test_car_one_id = 1
         test_car_one = self._build_car("Fiat", "Cronos", 2023, "Black")
@@ -160,7 +163,7 @@ class APIAndSQLiteTestCase(TestCase):
 
         for car in test_cars:
             parameters = self._car_to_json(car)
-            response = self._client.post(f"/cars", json=parameters)
+            response = self._client.post("/cars", json=parameters)
 
             actual_status_code = response.status_code
             actual_response_data = response.json()
@@ -197,7 +200,7 @@ class APIAndSQLiteTestCase(TestCase):
 
         for car in test_cars:
             parameters = self._car_to_json(car)
-            response = self._client.post(f"/cars", json=parameters)
+            response = self._client.post("/cars", json=parameters)
 
             actual_status_code = response.status_code
             actual_response_data = response.json()
@@ -231,7 +234,7 @@ class APIAndSQLiteTestCase(TestCase):
         test_car = self._build_car("Fiat", "Cronos", 2023, "Black")
 
         parameters = self._car_to_json(test_car)
-        response = self._client.post(f"/cars", json=parameters)
+        response = self._client.post("/cars", json=parameters)
 
         actual_status_code = response.status_code
         expected_status_code = 201
@@ -267,7 +270,7 @@ class APIAndSQLiteTestCase(TestCase):
         test_car = self._build_car("Fiat", "Cronos", 2023, "Black")
 
         parameters = self._car_to_json(test_car)
-        response = self._client.post(f"/cars", json=parameters)
+        response = self._client.post("/cars", json=parameters)
 
         actual_status_code = response.status_code
         expected_status_code = 201

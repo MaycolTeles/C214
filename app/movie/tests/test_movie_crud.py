@@ -84,7 +84,10 @@ class MovieCrudTestCase(TestCase):
         self.assertEqual(movie, self._movie_data)
 
     @patch("src.movie_crud.run_query")
-    def test_should_try_to_read_specific_movie_based_on_its_id_but_no_record_was_found(self, database_mock: MagicMock) -> None:
+    def test_should_try_to_read_specific_movie_based_on_its_id_but_no_record_was_found(
+        self,
+        database_mock: MagicMock
+    ) -> None:
         """
         """
         # GIVEN SELECT QUERY AND MOVIE ID
@@ -106,7 +109,10 @@ class MovieCrudTestCase(TestCase):
         self.assertIsNone(movie)
 
     @patch("src.movie_crud.run_query")
-    def test_should_read_all_movies_and_return_three_movies_data(self, database_mock: MagicMock) -> None:
+    def test_should_read_all_movies_and_return_three_movies_data(
+        self,
+        database_mock: MagicMock
+    ) -> None:
         """
         """
         # GIVEN SELECT QUERY
@@ -149,7 +155,10 @@ class MovieCrudTestCase(TestCase):
         self.assertEqual(len(movies), 3)
 
     @patch("src.movie_crud.run_query")
-    def test_should_read_all_movies_and_return_zero_movie_data(self, database_mock: MagicMock) -> None:
+    def test_should_read_all_movies_and_return_zero_movie_data(
+        self,
+        database_mock: MagicMock
+    ) -> None:
         """
         """
         # GIVEN SELECT QUERY
@@ -209,7 +218,7 @@ class MovieCrudTestCase(TestCase):
         '''
 
         movie_id = 1
-        
+
         values = (movie_id,)
 
         # WHEN MOVIE CRUD DELETE IS CALLED

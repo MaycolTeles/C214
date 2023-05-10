@@ -37,7 +37,7 @@ def get_car_by_id(car_id: int):
         message = f"Car not found for id {car_id}."
 
         raise HTTPException(status_code=status_code, detail=message)
- 
+
     return {"car": car}
 
 
@@ -61,7 +61,7 @@ def update_car(car_id: int, car: Car = Body(...)):
 
         raise HTTPException(status_code=status_code, detail=message)
 
-    response = f"Car with id #{car_id} updated in database." 
+    response = f"Car with id #{car_id} updated in database."
     return {"response": response}
 
 
@@ -74,7 +74,7 @@ def delete_car(car_id: int):
         status_code = 404
         message = f"Car not found for id {car_id}."
 
-        raise HTTPException(status_code=status_code, detail=message) 
+        raise HTTPException(status_code=status_code, detail=message)
 
     response = f"Car with id #{car_id} deleted from database."
     return {"response": response}

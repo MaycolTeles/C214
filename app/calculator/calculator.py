@@ -23,7 +23,9 @@ class InvalidValueTypeException(Exception):
         return f'Type of value "{value}" is "{value_type}" but it should be "float".'
 
 
-def validate_arguments(function: Callable[[Calculator, float, float], float]) -> Callable[[Calculator, float, float], float]:
+def validate_arguments(
+    function: Callable[[Calculator, float, float], float]
+) -> Callable[[Calculator, float, float], float]:
     """
     """
 
@@ -66,7 +68,7 @@ class Calculator:
         """
         """
         return value_1 * value_2
-    
+
     @validate_arguments
     def div(self, value_1: float, value_2: float) -> float:
         """
@@ -75,7 +77,7 @@ class Calculator:
             raise ZeroDivisionError("Divison by 0 not allowed!")
 
         return value_1 / value_2
-    
+
     @validate_arguments
     def expo(self, value_1: float, value_2: float) -> float:
         """

@@ -36,7 +36,7 @@ def run_query(
     db_path = _get_database_full_path()
 
     connection = sqlite3.connect(db_path)
-    cursor = connection.cursor()    
+    cursor = connection.cursor()
 
     cursor.execute(query, values)
 
@@ -111,7 +111,7 @@ class SQLiteRepository(Repository):
             return
 
         car_id = response[0][0]
-        
+
         car_brand, car_model, car_year, car_color = response[0][1:]
 
         car = Car(
@@ -139,7 +139,7 @@ class SQLiteRepository(Repository):
 
         for car_record in response:
             car_id = car_record[0]
-            
+
             car_brand, car_model, car_year, car_color = car_record[1:]
 
             car = Car(
@@ -177,7 +177,7 @@ class SQLiteRepository(Repository):
 
         if response == 0:
             return False
-        
+
         return True
 
     def delete_car(self, car_id: int) -> bool:
@@ -186,7 +186,7 @@ class SQLiteRepository(Repository):
         query = '''
             DELETE FROM cars WHERE id=?;
         '''
-        
+
         values = (car_id,)
 
         response = run_query(query, values, fetch_all=False)

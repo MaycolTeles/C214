@@ -34,7 +34,7 @@ class APITestCase(TestCase):
         )
 
         return car
-    
+
     def _car_to_json(self, car: Car) -> Dict[str, Union[str, int]]:
         """
         Private method to convert the car to JSON format.
@@ -46,7 +46,7 @@ class APITestCase(TestCase):
             "color": car.color,
         }
         return json
-    
+
     def test_should_get_index_endpoint(self, mock_repository: MagicMock) -> None:
         """
         Method to assert the api has a get method endpoint to be the index.
@@ -76,7 +76,9 @@ class APITestCase(TestCase):
         expected_status_code = 200
 
         actual_response_data = response.json()
-        expected_response_data = {"cars": "No car found in database yet. Try adding some before retrieving any."}
+        expected_response_data = {
+            "cars": "No car found in database yet. Try adding some before retrieving any."
+        }
 
         self.assertEqual(actual_status_code, expected_status_code)
         self.assertEqual(actual_response_data, expected_response_data)
@@ -118,7 +120,10 @@ class APITestCase(TestCase):
 
         mock_function.assert_called_once()
 
-    def test_should_return_an_error_when_trying_to_retrieve_car_that_doesnt_exists_by_its_id(self, mock_repository: MagicMock) -> None:
+    def test_should_return_an_error_when_trying_to_retrieve_car_that_doesnt_exists_by_its_id(
+        self,
+        mock_repository: MagicMock
+    ) -> None:
         """
         Method to assert the api has a get method endpoint that returns an error
         when the actor tries to access a single car data by its id
@@ -175,7 +180,7 @@ class APITestCase(TestCase):
 
         test_params = self._car_to_json(test_car)
 
-        response = self._client.post(f"/cars", json=test_params)
+        response = self._client.post("/cars", json=test_params)
 
         actual_status_code = response.status_code
         expected_status_code = 201
@@ -188,7 +193,10 @@ class APITestCase(TestCase):
 
         mock_function.assert_called_once_with(test_car)
 
-    def test_should_return_an_error_when_inserting_new_car_with_wrong_year_type(self, mock_repository: MagicMock) -> None:
+    def test_should_return_an_error_when_inserting_new_car_with_wrong_year_type(
+        self,
+        mock_repository: MagicMock
+    ) -> None:
         """
         Method to assert the api has a post endpoint that returns an error
         when trying to insert a car into the repository but it receives the year in a wrong type.
@@ -202,7 +210,7 @@ class APITestCase(TestCase):
             "color": "White"
         }
 
-        response = self._client.post(f"/cars", json=test_params)
+        response = self._client.post("/cars", json=test_params)
 
         actual_status_code = response.status_code
         expected_status_code = 422
@@ -237,7 +245,10 @@ class APITestCase(TestCase):
 
         mock_function.assert_called_once_with(test_car_id, test_car)
 
-    def test_should_return_an_error_when_trying_to_update_that_doesnt_exists(self, mock_repository: MagicMock) -> None:
+    def test_should_return_an_error_when_trying_to_update_that_doesnt_exists(
+        self,
+        mock_repository: MagicMock
+    ) -> None:
         """
         Method to assert the api has a put endpoint that returns an error
         when trying to update a car that doesn't exists in the repository.
@@ -263,7 +274,10 @@ class APITestCase(TestCase):
 
         mock_function.assert_called_once_with(test_wrong_car_id, test_car)
 
-    def test_should_return_an_error_when_trying_to_update_car_with_wrong_year_type(self, mock_repository: MagicMock) -> None:
+    def test_should_return_an_error_when_trying_to_update_car_with_wrong_year_type(
+        self,
+        mock_repository: MagicMock
+    ) -> None:
         """
         Method to assert the api has a put endpoint that returns an error
         when trying to update a car when the wrong year type is passed to it.
@@ -312,7 +326,10 @@ class APITestCase(TestCase):
 
         mock_function.assert_called_once_with(test_car_id)
 
-    def test_should_return_an_error_when_deleting_a_car_that_doesnt_exists(self, mock_repository: MagicMock) -> None:
+    def test_should_return_an_error_when_deleting_a_car_that_doesnt_exists(
+        self,
+        mock_repository: MagicMock
+    ) -> None:
         """
         Method to assert the api has a delete endpoint that returns an error
         when trying to delete a car that doesn't exists in the repository.
