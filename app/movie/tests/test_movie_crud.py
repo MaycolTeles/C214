@@ -4,8 +4,8 @@
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
-from src.movie_crud import MovieCrud
-from src.movie_data import MovieData
+from movie.src.movie_crud import MovieCrud
+from movie.src.movie_data import MovieData
 
 
 class MovieCrudTestCase(TestCase):
@@ -31,7 +31,7 @@ class MovieCrudTestCase(TestCase):
 
         self._movie_crud = MovieCrud()
 
-    @patch("src.movie_crud.run_query")
+    @patch("movie.src.movie_crud.run_query")
     def test_should_create_new_movie(self, database_mock: MagicMock) -> None:
         """
         """
@@ -55,7 +55,7 @@ class MovieCrudTestCase(TestCase):
         # THEN ASSERT DATABASE WAS CALLED
         database_mock.assert_called_once_with(query, values)
 
-    @patch("src.movie_crud.run_query")
+    @patch("movie.src.movie_crud.run_query")
     def test_should_read_specific_movie_based_on_its_id(self, database_mock: MagicMock) -> None:
         """
         """
@@ -83,7 +83,7 @@ class MovieCrudTestCase(TestCase):
         database_mock.assert_called_once_with(query, values)
         self.assertEqual(movie, self._movie_data)
 
-    @patch("src.movie_crud.run_query")
+    @patch("movie.src.movie_crud.run_query")
     def test_should_try_to_read_specific_movie_based_on_its_id_but_no_record_was_found(
         self,
         database_mock: MagicMock
@@ -108,7 +108,7 @@ class MovieCrudTestCase(TestCase):
         database_mock.assert_called_once_with(query, values)
         self.assertIsNone(movie)
 
-    @patch("src.movie_crud.run_query")
+    @patch("movie.src.movie_crud.run_query")
     def test_should_read_all_movies_and_return_three_movies_data(
         self,
         database_mock: MagicMock
@@ -154,7 +154,7 @@ class MovieCrudTestCase(TestCase):
         database_mock.assert_called_once_with(query)
         self.assertEqual(len(movies), 3)
 
-    @patch("src.movie_crud.run_query")
+    @patch("movie.src.movie_crud.run_query")
     def test_should_read_all_movies_and_return_zero_movie_data(
         self,
         database_mock: MagicMock
@@ -175,7 +175,7 @@ class MovieCrudTestCase(TestCase):
         database_mock.assert_called_once_with(query)
         self.assertIsNone(movies)
 
-    @patch("src.movie_crud.run_query")
+    @patch("movie.src.movie_crud.run_query")
     def test_should_update_a_movie(self, database_mock: MagicMock) -> None:
         """
         """
@@ -208,7 +208,7 @@ class MovieCrudTestCase(TestCase):
         # THEN ASSERT DATABASE WAS CALLED
         database_mock.assert_called_once_with(query, values)
 
-    @patch("src.movie_crud.run_query")
+    @patch("movie.src.movie_crud.run_query")
     def test_should_delete_a_movie(self, database_mock: MagicMock) -> None:
         """
         """

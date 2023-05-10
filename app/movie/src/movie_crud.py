@@ -2,8 +2,8 @@
 """
 from typing import Optional
 
-from src.database import run_query
-from src.movie_data import MovieData
+from movie.src.database import run_query
+from movie.src.movie_data import MovieData
 
 
 class MovieCrud:
