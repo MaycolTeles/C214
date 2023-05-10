@@ -24,7 +24,13 @@ jobs:
 
     - name: Test with pytest
       run: |
-        pytest
+        pytest --junitxml=test-report.xml --html=test-report.html --self-contained-html
+
+    - name: Upload test report
+      uses: actions/upload-artifact@v2
+      with:
+        name: pytest-report
+        path: test-report.html
 
   lint:
     runs-on: ubuntu-latest
@@ -47,24 +53,3 @@ jobs:
         flake8 app/ --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 app/ --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-
-  build:
-    runs-on: ubuntu-latest
-
-    needs: test
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python 3.9
-      uses: actions/setup-python@v3
-      with:
-        python-version: 3.9
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-
-    - name: Build with PyInstaller
-      run: |
-        pyinstaller --onefile --windowed main.py
